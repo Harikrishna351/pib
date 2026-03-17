@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Civic Memory Project | India</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a237e;
+            --accent: #ff6f00;
+            --danger: #d32f2f;
+            --success: #388e3c;
+            --warning: #fbc02d;
+            --bg: #f5f5f7;
+            --card: #ffffff;
+            --text: #212121;
+            --text-secondary: #757575;
+            --border: #e0e0e0;
+            --india-saffron: #ff9933;
+            --india-green: #138808;
+            --india-blue: #000080;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, #283593 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            color: var(--india-saffron);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--india-saffron);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Story Header */
+        .story-header {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--danger);
+        }
+
+        .story-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(211, 47, 47, 0.1);
+            color: var(--danger);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+
+        .story-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .story-meta {
+            display: flex;
+            gap: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .location-tag {
+            background: var(--india-blue);
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        /* Accountability Clock */
+        .accountability-section {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .clock-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .clock-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: transform 0.3s;
+        }
+
+        .clock-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .clock-card.critical {
+            border-color: var(--danger);
+            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+        }
+
+        .clock-card.warning {
+            border-color: var(--warning);
+            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+        }
+
+        .clock-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1;
+        }
+
+        .clock-card.critical .clock-number {
+            color: var(--danger);
+        }
+
+        .clock-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Timeline */
+        .timeline-container {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--danger), var(--warning), var(--success));
+        }
+
+        .timeline-event {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .timeline-event:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .timeline-event::before {
+            content: '';
+            position: absolute;
+            left: -3.35rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--card);
+            border: 3px solid var(--primary);
+            z-index: 10;
+        }
+
+        .timeline-event.incident::before { border-color: var(--danger); background: var(--danger); }
+        .timeline-event.govt::before { border-color: var(--india-blue); }
+        .timeline-event.policy::before { border-color: var(--success); }
+        .timeline-event.protest::before { border-color: var(--warning); }
+
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .event-date {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .event-type {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            background: rgba(0,0,0,0.05);
+        }
+
+        .event-type.incident { color: var(--danger); background: rgba(211, 47, 47, 0.1); }
+        .event-type.govt { color: var(--india-blue); background: rgba(26, 35, 126, 0.1); }
+        .event-type.policy { color: var(--success); background: rgba(56, 142, 60, 0.1); }
+        .event-type.protest { color: var(--accent); background: rgba(255, 111, 0, 0.1); }
+
+        .event-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .event-desc {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+
+        .event-source {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        /* Government Response Tracker */
+        .govt-tracker {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .ministry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .ministry-card {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ministry-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--india-blue);
+        }
+
+        .ministry-name {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .action-list {
+            list-style: none;
+        }
+
+        .action-item {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .action-item:last-child {
+            border-bottom: none;
+        }
+
+        .action-text {
+            font-size: 0.9rem;
+        }
+
+        .action-status {
+            font-size: 0.75rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .status-announced { background: #e3f2fd; color: #1565c0; }
+        .status-progress { background: #fff3e0; color: #ef6c00; }
+        .status-completed { background: #e8f5e9; color: #2e7d32; }
+
+        /* Analysis Section */
+        .analysis-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .analysis-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .analysis-card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .analysis-card h3 {
+            color: var(--danger);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .analysis-card.positive h3 {
+            color: var(--success);
+        }
+
+        .check-list, .cross-list {
+            list-style: none;
+        }
+
+        .check-list li, .cross-list li {
+            padding: 0.75rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .check-list li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--success);
+        }
+
+        .cross-list li::before {
+            content: '\f00d';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--danger);
+        }
+
+        /* Pattern Recognition */
+        .pattern-section {
+            background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .pattern-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pattern-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .pattern-card:hover {
+            transform: translateX(5px);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .pattern-date {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+        }
+
+        .pattern-headline {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .pattern-meta {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .similarity-score {
+            float: right;
+            background: rgba(255,255,255,0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        /* Legislative Tracker */
+        .legislative-section {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .bill-tracker {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .bill-step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+
+        .bill-step::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            right: -50%;
+            width: 100%;
+            height: 2px;
+            background: var(--border);
+            z-index: 1;
+        }
+
+        .bill-step:last-child::after {
+            display: none;
+        }
+
+        .bill-step.completed::after {
+            background: var(--success);
+        }
+
+        .step-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.5rem;
+            position: relative;
+            z-index: 2;
+            font-weight: 700;
+            color: white;
+        }
+
+        .bill-step.completed .step-icon {
+            background: var(--success);
+        }
+
+        .bill-step.active .step-icon {
+            background: var(--india-blue);
+            animation: pulse-blue 2s infinite;
+        }
+
+        @keyframes pulse-blue {
+            0% { box-shadow: 0 0 0 0 rgba(26, 35, 126, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(26, 35, 126, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(26, 35, 126, 0); }
+        }
+
+        .step-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .step-date {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .story-title {
+                font-size: 1.75rem;
+            }
+
+            .story-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .clock-number {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-landmark"></i>
+                Civic Memory Project
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#">Active Cases</a></li>
+                    <li><a href="#">Archives</a></li>
+                    <li><a href="#">Accountability</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- Story Header -->
+        <div class="story-header">
+            <div class="story-badge">
+                <i class="fas fa-exclamation-circle"></i>
+                Active Monitoring
+            </div>
+            <h1 class="story-title">Bihar Bridge Collapse: The Saran Tragedy and Systemic Response</h1>
+            <div class="story-meta">
+                <div class="meta-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span class="location-tag">Bihar</span>
+                    <span>Saran District, Bhagwanpur</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-calendar"></i>
+                    First Reported: June 4, 2023
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-tag"></i>
+                    Infrastructure, Corruption, Public Safety
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-users"></i>
+                    Affected: 2.5 lakh residents
+                </div>
+            </div>
+        </div>
+
+        <!-- Accountability Clock -->
+        <div class="accountability-section">
+            <h2 class="section-title">
+                <i class="fas fa-clock"></i>
+                Accountability Metrics
+            </h2>
+            <div class="clock-grid">
+                <div class="clock-card critical">
+                    <div class="clock-number" id="days-elapsed">547</div>
+                    <div class="clock-label">Days Since Collapse</div>
+                    <div class="status-indicator">
+                        <span class="status-dot" style="background: var(--danger);"></span>
+                        Awaiting Justice
+                    </div>
+                </div>
+
+                <div class="clock-card warning">
+                    <div class="clock-number">23</div>
+                    <div class="clock-label">Days to First Response</div>
+                    <div class="status-indicator" style="color: var(--warning);">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Delayed Response
+                    </div>
+                </div>
+
+                <div class="clock-card">
+                    <div class="clock-number">3</div>
+                    <div class="clock-label">Arrests Made</div>
+                    <div class="status-indicator" style="color: var(--text-secondary);">
+                        Contractors & Engineers
+                    </div>
+                </div>
+
+                <div class="clock-card">
+                    <div class="clock-number">0</div>
+                    <div class="clock-label">Bridges Reconstructed</div>
+                    <div class="status-indicator" style="color: var(--danger);">
+                        <i class="fas fa-times-circle"></i>
+                        No Action
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Timeline -->
+        <div class="timeline-container">
+            <h2 class="section-title">
+                <i class="fas fa-stream"></i>
+                Civic Timeline
+            </h2>
+            <div class="timeline">
+
+                <div class="timeline-event incident">
+                    <div class="event-header">
+                        <span class="event-date">June 4, 2023 | 6:30 AM</span>
+                        <span class="event-type incident">Incident</span>
+                    </div>
+                    <h3 class="event-title">Aguwani-Sultanganj Bridge Collapse</h3>
+                    <p class="event-desc">
+                        Under-construction bridge across Burhi Gandak River collapses for the second time.
+                        The ₹1,710 crore project, meant to connect Saran and Bhagalpur districts,
+                        had partially collapsed in April 2022. This time, the entire superstructure falls
+                        into the river during construction.
+                    </p>
+                    <div class="event-source">Source: PIB, The Hindu, NDTV</div>
+                </div>
+
+                <div class="timeline-event govt">
+                    <div class="event-header">
+                        <span class="event-date">June 4, 2023 | 2:00 PM</span>
+                        <span class="event-type govt">Govt Response</span>
+                    </div>
+                    <h3 class="event-title">CM Nitish Kumar Orders Probe</h3>
+                    <p class="event-desc">
+                        Bihar Chief Minister announces high-level committee under Special Secretary
+                        of Building Construction Department. Ministry of Road Transport and Highways
+                        (MoRTH) seeks report within 15 days. SP Company (contractor) blacklisted
+                        from future projects.
+                    </p>
+                    <div class="event-source">Source: Chief Minister's Office, Bihar</div>
+                </div>
+
+                <div class="timeline-event protest">
+                    <div class="event-header">
+                        <span class="event-date">June 5-10, 2023</span>
+                        <span class="event-type protest">Public Response</span>
+                    </div>
+                    <h3 class="event-title">Local Protests & Opposition Demands</h3>
+                    <p class="event-desc">
+                        Residents block NH-31 demanding accountability. Opposition parties RJD and
+                        Congress stage protests in Patna. PIL filed in Patna High Court seeking
+                        CBI inquiry into corruption allegations in construction quality.
+                    </p>
+                    <div class="event-source">Source: Local stringers, High Court Registry</div>
+                </div>
+
+                <div class="timeline-event policy">
+                    <div class="event-header">
+                        <span class="event-date">June 27, 2023</span>
+                        <span class="event-type policy">Policy Change</span>
+                    </div>
+                    <h3 class="event-title">Bihar Infrastructure Safety Audit Ordered</h3>
+                    <p class="event-desc">
+                        State government mandates structural audit of all under-construction bridges
+                        in Bihar. Third-party inspection mandatory for all projects above ₹50 crore.
+                        New clauses added to contractor agreements: "Total liability for design failure."
+                    </p>
+                    <div class="event-source">Source: Cabinet Decision, Bihar Govt</div>
+                </div>
+
+                <div class="timeline-event govt">
+                    <div class="event-header">
+                        <span class="event-date">August 14, 2023</span>
+                        <span class="event-type govt">Investigation</span>
+                    </div>
+                    <h3 class="event-title">Forensic Report Submitted</h3>
+                    <p class="event-desc">
+                        IIT-Roorkee forensic report identifies design flaws and substandard materials.
+                        Report confirms use of inferior quality cement and inadequate welding of joints.
+                        Recommends dismantling remaining structure.
+                    </p>
+                    <div class="event-source">Source: IIT Roorkee (Confidential, leaked to press)</div>
+                </div>
+
+                <div class="timeline-event govt">
+                    <div class="event-header">
+                        <span class="event-date">March 2024</span>
+                        <span class="event-type govt">Current Status</span>
+                    </div>
+                    <h3 class="event-title">Case Under Investigation, No Reconstruction</h3>
+                    <p class="event-desc">
+                        EOW (Economic Offences Wing) arrests 3 including project manager and
+                        quality control engineer. Project cost escalated by ₹400 crore for demolition
+                        and reconstruction. Tender process delayed due to contractor blacklisting.
+                    </p>
+                    <div class="event-source">Source: EOW Bihar, PTI</div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Government Response Tracker -->
+        <div class="govt-tracker">
+            <h2 class="section-title">
+                <i class="fas fa-university"></i>
+                Government Response Matrix
+            </h2>
+            <div class="ministry-grid">
+
+                <div class="ministry-card">
+                    <div class="ministry-name">
+                        <i class="fas fa-building"></i>
+                        Ministry of Road Transport & Highways
+                    </div>
+                    <ul class="action-list">
+                        <li class="action-item">
+                            <span class="action-text">High-level inquiry ordered</span>
+                            <span class="action-status status-completed">Completed</span>
+                        </li>
+                        <li class="action-item">
+                            <span class="action-text">Contractor blacklisting</span>
+                            <span class="action-status status-completed">Completed</span>
+                        </li>
+                        <li class="action-item">
+                            <span class="action-text">Technical audit of all Bihar bridges</span>
+                            <span class="action-status status-progress">In Progress</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="ministry-card">
+                    <div class="ministry-name">
+                        <i class="fas fa-home"></i>
+                        Bihar State Government
+                    </div>
+                    <ul class="action-list">
+                        <li class="action-item">
+                            <span class="action-text">FIR registration against SP Company</span>
+                            <span class="action-status status-completed">Completed</span>
+                        </li>
+                        <li class="action-item">
+                            <span class="action-text">Compensation to affected families</span>
+                            <span class="action-status status-announced">Announced</span>
+                        </li>
+                        <li class="action-item">
+                            <span class="action-text">New bridge construction</span>
+                            <span class="action-status status-announced">Tender Pending</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Legislative Impact -->
+        <div class="legislative-section">
+            <h2 class="section-title">
+                <i class="fas fa-gavel"></i>
+                Legislative Impact
+            </h2>
+            <p style="margin-bottom: 1rem; color: var(--text-secondary);">
+                Following this incident, the Bihar Infrastructure Safety Bill 2023 was introduced
+                to prevent recurrence.
+            </p>
+
+            <div class="bill-tracker">
+                <div class="bill-step completed">
+                    <div class="step-icon"><i class="fas fa-check"></i></div>
+                    <div class="step-label">Cabinet Approved</div>
+                    <div class="step-date">Aug 2023</div>
+                </div>
+                <div class="bill-step completed">
+                    <div class="step-icon"><i class="fas fa-check"></i></div>
+                    <div class="step-label">Assembly Introduced</div>
+                    <div class="step-date">Dec 2023</div>
+                </div>
+                <div class="bill-step active">
+                    <div class="step-icon">3</div>
+                    <div class="step-label">Committee Review</div>
+                    <div class="step-date">Pending</div>
+                </div>
+                <div class="bill-step">
+                    <div class="step-icon">4</div>
+                    <div class="step-label">Passed</div>
+                    <div class="step-date">--</div>
+                </div>
+                <div class="bill-step">
+                    <div class="step-icon">5</div>
+                    <div class="step-label">Implemented</div>
+                    <div class="step-date">--</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Analysis -->
+        <div class="analysis-section">
+            <div class="analysis-card">
+                <h3><i class="fas fa-times-circle"></i> What Went Wrong</h3>
+                <ul class="cross-list">
+                    <li>Design flaws identified by IIT-Roorkee report</li>
+                    <li>Substandard cement used (quality 30% below spec)</li>
+                    <li>Inadequate supervision by state engineers</li>
+                    <li>Previous collapse warning (April 2022) ignored</li>
+                    <li>Contractor continued work without design revision</li>
+                    <li>No third-party audit before second collapse</li>
+                </ul>
+            </div>
+
+            <div class="analysis-card positive">
+                <h3><i class="fas fa-check-circle"></i> Preventive Measures Now Active</h3>
+                <ul class="check-list">
+                    <li>Mandatory third-party inspection for >₹50Cr projects</li>
+                    <li>Real-time monitoring sensors on bridge structures</li>
+                    <li>Contractor liability extended to 10 years</li>
+                    <li>Whistleblower protection for quality engineers</li>
+                    <li>Drone surveillance of construction sites</li>
+                    <li>Centralized database of blacklisted contractors</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Pattern Recognition -->
+        <div class="pattern-section">
+            <h2 class="pattern-title">
+                <i class="fas fa-project-diagram"></i>
+                Pattern Recognition: Similar Incidents
+            </h2>
+            <p style="margin-bottom: 1.5rem; opacity: 0.9;">
+                This incident shares 87% structural similarity with past infrastructure failures
+                in the Gangetic plains region.
+            </p>
+
+            <div class="pattern-card">
+                <span class="similarity-score">94% Match</span>
+                <div class="pattern-date">April 2022</div>
+                <div class="pattern-headline">Aguwani-Sultanganj Bridge: First Collapse</div>
+                <div class="pattern-meta">
+                    Same location, same contractor, same design flaws. Warning signs ignored.
+                </div>
+            </div>
+
+            <div class="pattern-card">
+                <span class="similarity-score">82% Match</span>
+                <div class="pattern-date">September 2017</div>
+                <div class="pattern-headline">Palla Bridge Collapse, Faridabad</div>
+                <div class="pattern-meta">
+                    Design failure in flood-prone area, inadequate material testing.
+                    Result: Banned contractor from NHAI projects for 5 years.
+                </div>
+            </div>
+
+            <div class="pattern-card">
+                <span class="similarity-score">76% Match</span>
+                <div class="pattern-date">March 2016</div>
+                <div class="pattern-headline">Under-construction Flyover, Kolkata</div>
+                <div class="pattern-meta">
+                    27 deaths. Similar failure: Overloading during construction,
+                    inadequate curing time for concrete.
+                </div>
+            </div>
+        </div>
+
+        <footer style="text-align: center; padding: 2rem; color: var(--text-secondary); font-size: 0.9rem;">
+            <p>Civic Memory Project &copy; 2024 | Tracking Governance, One Story at a Time</p>
+            <p style="margin-top: 0.5rem; font-size: 0.8rem;">
+                Data sources: PIB India, PRS Legislative, Bihar State Archives, IIT Reports, High Court Records
+            </p>
+        </footer>
+
+    </div>
+
+    <script>
+        // Dynamic days counter
+        function updateDays() {
+            const start = new Date('2023-06-04');
+            const now = new Date();
+            const diff = Math.floor((now - start) / (1000 * 60 * 60 * 24));
+            document.getElementById('days-elapsed').textContent = diff;
+        }
+        updateDays();
+
+        // Animate cards on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        document.querySelectorAll('.clock-card, .timeline-event, .ministry-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.5s, transform 0.5s';
+            observer.observe(el);
+        });
+
+        // Click handlers for pattern cards
+        document.querySelectorAll('.pattern-card').forEach(card => {
+            card.addEventListener('click', function() {
+                alert('This would open the related case from our archives: ' +
+                      this.querySelector('.pattern-headline').textContent);
+            });
+        });
+    </script>
+
+</body>
+</html>
